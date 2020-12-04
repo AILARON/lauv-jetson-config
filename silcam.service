@@ -1,0 +1,11 @@
+[Unit]
+Description=silcam service
+
+[Service]
+Type=simple
+User=logger
+Group=logger
+ExecStart=/usr/local/bin/start_silcam.sh
+
+[Install]
+WantedBy=default.target
