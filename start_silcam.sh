@@ -17,9 +17,23 @@ echo "Sleep 1"
 sleep 1
 
 echo "Go!"
-echo "----"
-echo "Starting SILCAM AQUIRE"
-silcam acquire /mnt/DATA/config.ini /mnt/DATA/RAW/ --discwrite
+echo "-----"
+value=`cat /home/logger/.dune-silcam.arg`
+echo "Argument from dune silcam task:  $value"
+if [ "$value" == "Acquire" ]; then
+	echo "Starting SILCAM ACQUIRE"
+	silcam acquire /mnt/DATA/config.ini /mnt/DATA/RAW/ --discwrite
+elif [ "$value" == "Process" ]; then
+	echo "Starting SILCAM PROCESS"
+	silcam realtime /mnt/DATA/config.ini /mnt/DATA/RAW --appendstats
+elif [ "$value" == "Both" ]; then
+	echo "Starting SILCAM BOTH"
+	silcam realtime /mnt/DATA/config.ini /mnt/DATA/RAW --discwrite --appendstats
+else
+	echo "Unknown argument in /home/logger/.dune-silcam.arg, defaults to Acquire"
+	silcam acquire /mnt/DATA/config.ini /mnt/DATA/RAW/ --discwrite
+fi
+#silcam acquire /mnt/DATA/config.ini /mnt/DATA/RAW/ --discwrite
 #silcam realtime /mnt/DATA/config.ini /mnt/DATA/RAW --appendstats
 #silcam realtime /mnt/DATA/config.ini /mnt/DATA/RAW --discwrite --appendstats
 
