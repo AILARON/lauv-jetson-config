@@ -1,5 +1,0 @@
-start_silcam.sh: /usr/local/bin
-ini_silcam.sh: /usr/local/bin
-silcam service: /etc/systemd/system/silcam.service
-dune-silcam.arg: /home/logger/.dune-silcam.arg
-network: /etc/network/interfaces
